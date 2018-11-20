@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DataTemplateSelectorDemo"
+             x:Class="DataTemplateSelectorDemo.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Blue Item Template -->
+            <DataTemplate x:Key="blueItemTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="LightSkyBlue"
+                          Padding="20">
+                        <Label Text="This is a blue cell"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            
+            <!-- Red Item Template -->
+            <DataTemplate x:Key="redItemTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="Red"
+                          Padding="20">
+                        <Label Text="This is a red cell"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <!-- Green Grouping Template -->
+            <DataTemplate x:Key="greenGroupingTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="Green">
+                        <Label Text="{Binding Key}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <!-- Yellow Grouping Template -->
+            <DataTemplate x:Key="yellowGroupingTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="Yellow">
+                        <Label Text="{Binding Key}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <local:ItemDataTemplateSelector x:Key="itemDataTemplateSelector"
+                                            RedDataTemplate="{StaticResource redItemTemplate}"
+                                            BlueDataTemplate="{StaticResource blueItemTemplate}"/>
+
+            <local:GroupingDataTemplateSelector x:Key="groupingDataTemplateSelector"
+                                                GreenDataTemplate="{StaticResource greenGroupingTemplate}"
+                                                YellowDataTemplate="{StaticResource yellowGroupingTemplate}"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+            <ListView ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem}"
+                      ItemTemplate="{StaticResource itemDataTemplateSelector}"
+                      GroupHeaderTemplate="{StaticResource groupingDataTemplateSelector}"
+                      IsGroupingEnabled="True"
+                      SeparatorVisibility="Default"
+                      SeparatorColor="#95989A"
+                      HasUnevenRows="True"/>
+    </ContentPage.Content>
+
+
+</ContentPage>
